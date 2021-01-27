@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="remove-iphn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="iphn-amount" type="text" class="form-control text-center" value="1">
+                           <button id="add-iphn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$ <span id="iphn-price">1219</span></h5>
+                        <img id="iphn-reset" src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input type="text" class="form-control text-center" value="1">
+                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$59</h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$ <span id="subtotal">00</span></h5>
+                        <h5>$0</h5>
+                        <h5>$1,278</h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <script>
+      var addIphone = document.getElementById('add-iphn');
+      var removeIphn = document.getElementById('remove-iphn');
+      var iphnReset = document.getElementById('iphn-reset');
+      // var iphnAmount = convertValue('iphn-amount');
+      var iphnPrice = convertString('iphn-price');
+      // add iphone
+      addIphone.addEventListener('click', function () {
+         var iphnAmount = convertValue('iphn-amount') + 1;
+         // var result = iphnAmount++;
+         var totalPrice = iphnAmount * 1219;
+         var subTotal = convertString('subtotal');
+         var total = iphnAmount * 1219;
+         document.getElementById('subtotal').innerHTML = total;
+         document.getElementById('iphn-amount').value = iphnAmount;
+         document.getElementById('iphn-price').innerHTML = totalPrice;
+      })
+      // remove ipone
+      removeIphn.addEventListener('click', function () {
+         var iphnAmount = convertValue('iphn-amount') - 1;
+         var iphnPrice = convertString('iphn-price');
+         var totalPrice = iphnPrice - 1219;
+         var subTotal = convertString('subtotal');
+         var total = subTotal - 1219;
+         document.getElementById('subtotal').innerHTML = total;
+         document.getElementById('iphn-amount').value = iphnAmount;
+         document.getElementById('iphn-price').innerHTML = totalPrice;
+      })
+      // iphone reset 
+      iphnReset.addEventListener('click', function () {
+         var total = 1219;
+         var iphnAmount = 1;
+         var iphnPrice = convertString('iphn-price');
+         var subTotal = convertString('subtotal');
+         var totalPrice = subTotal - iphnPrice;
+         document.getElementById('iphn-amount').value = iphnAmount;
+         document.getElementById('iphn-price').innerHTML = total;
+         var iphnPrice = convertString('iphn-price');
+         var totalPrice = iphnPrice;
+         document.getElementById('subtotal').innerHTML = totalPrice;
+
+      })
+      // subtotal
+
+
+      function convertValue(id) {
+         var convert = document.getElementById(id).value;
+         var convertFloat = parseFloat(convert);
+         return convertFloat;
+      }
+      function convertString(id) {
+         var convert = document.getElementById(id).innerHTML;
+         var convertFloat = parseFloat(convert);
+         return convertFloat;
+      }
+   </script>
+</body>
+
+</html>
