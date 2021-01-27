@@ -43,13 +43,13 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="case-remove" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="case-amount" type="text" class="form-control text-center" value="1">
+                           <button id="case-add" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <h5>$ <span id="case-price">59</span></h5>
+                        <img id="case-reset" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$ <span id="subtotal">00</span></h5>
+                        <h5>$ <span id="subtotal">1278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="total">1,278</span> </h5>
                      </div>
                   </div>
                </div>
@@ -87,13 +87,14 @@
       // add iphone
       addIphone.addEventListener('click', function () {
          var iphnAmount = convertValue('iphn-amount') + 1;
-         // var result = iphnAmount++;
          var totalPrice = iphnAmount * 1219;
          var subTotal = convertString('subtotal');
-         var total = iphnAmount * 1219;
+         var total = 1219 + subTotal;
          document.getElementById('subtotal').innerHTML = total;
          document.getElementById('iphn-amount').value = iphnAmount;
          document.getElementById('iphn-price').innerHTML = totalPrice;
+         var lastTotal = document.getElementById('subtotal').innerHTML;
+         document.getElementById('total').innerHTML = lastTotal;
       })
       // remove ipone
       removeIphn.addEventListener('click', function () {
@@ -105,6 +106,8 @@
          document.getElementById('subtotal').innerHTML = total;
          document.getElementById('iphn-amount').value = iphnAmount;
          document.getElementById('iphn-price').innerHTML = totalPrice;
+         var lastTotal = document.getElementById('subtotal').innerHTML;
+         document.getElementById('total').innerHTML = lastTotal;
       })
       // iphone reset 
       iphnReset.addEventListener('click', function () {
@@ -115,14 +118,61 @@
          var totalPrice = subTotal - iphnPrice;
          document.getElementById('iphn-amount').value = iphnAmount;
          document.getElementById('iphn-price').innerHTML = total;
-         var iphnPrice = convertString('iphn-price');
-         var totalPrice = iphnPrice;
+         var casePrice = convertString('case-price');
+         var totalPrice = casePrice + 1219;
          document.getElementById('subtotal').innerHTML = totalPrice;
-
+         var lastTotal = document.getElementById('subtotal').innerHTML;
+         document.getElementById('total').innerHTML = lastTotal;
       })
-      // subtotal
+      // iphone case add
+      var caseAdd = document.getElementById('case-add');
+      var casePrice = convertString('case-price');
+      var caseReset = document.getElementById('case-reset');
+      caseAdd.addEventListener('click', function () {
+         var caseAmount = convertValue('case-amount') + 1;
+         var Price = caseAmount * 59;
+         var subtotal = convertString('subtotal');
+         var total = 59 + subtotal;
+         document.getElementById('subtotal').innerHTML = total;
+         document.getElementById('case-amount').value = caseAmount;
+         document.getElementById('case-price').innerHTML = Price;
+         var lastTotal = document.getElementById('subtotal').innerHTML;
+         document.getElementById('total').innerHTML = lastTotal;
+      })
+      // iphone case remove
+      var caseRemove = document.getElementById('case-remove');
+      caseRemove.addEventListener('click', function () {
+         var caseAmount = convertValue('case-amount') - 1;
+         var casePrice = convertString('case-price');
+         var Price = casePrice - 59;
+         var subtotal = convertString('subtotal');
+         var total = subtotal - 59;
+         document.getElementById('subtotal').innerHTML = total;
+         document.getElementById('case-amount').value = caseAmount;
+         document.getElementById('case-price').innerHTML = Price;
+         var lastTotal = document.getElementById('subtotal').innerHTML;
+         document.getElementById('total').innerHTML = lastTotal;
+      })
+      // iphone case reset 
+      caseReset.addEventListener('click', function () {
+         var total = 59;
+         var caseAmount = 1;
+         var casePrice = convertString('case-price');
+         var subTotal = convertString('subtotal');
+         var totalPrice = subTotal - casePrice;
+         document.getElementById('case-amount').value = caseAmount;
+         document.getElementById('case-price').innerHTML = total;
+         var iphnPrice = convertString('iphn-price');
+         var totalPrice = iphnPrice + 59;
+         document.getElementById('subtotal').innerHTML = totalPrice;
+         var lastTotal = document.getElementById('subtotal').innerHTML;
+         document.getElementById('total').innerHTML = lastTotal;
+      })
+      // var lastTotal = document.getElementById('subtotal').innerHTML;
+      // document.getElementById('total').innerHTML = lastTotal;
+      
 
-
+      // conver value and string to float!
       function convertValue(id) {
          var convert = document.getElementById(id).value;
          var convertFloat = parseFloat(convert);
